@@ -73,7 +73,11 @@ struct JsonNode {
 
 struct JsonIterator {
 	JsonNode *p;
-
+	JsonIterator(){};
+	JsonIterator(JsonNode *n)
+		:p(n)
+	{
+	}
 	void operator++() {
 		p = p->next;
 	}
@@ -89,10 +93,10 @@ struct JsonIterator {
 };
 
 inline JsonIterator begin(JsonValue o) {
-	return JsonIterator{o.toNode()};
+	return JsonIterator(o.toNode());
 }
 inline JsonIterator end(JsonValue) {
-	return JsonIterator{nullptr};
+	return JsonIterator(nullptr);
 }
 
 enum JsonParseStatus {
@@ -112,9 +116,10 @@ class JsonAllocator {
 	struct Zone {
 		Zone *next;
 		size_t used;
-	} *head = nullptr;
+	} *head;
 
 public:
+	JsonAllocator();
 	~JsonAllocator();
 	void *allocate(size_t size);
 	void deallocate();

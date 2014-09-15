@@ -5,6 +5,10 @@
 #define JSON_ZONE_SIZE 4096
 #define JSON_STACK_SIZE 32
 
+JsonAllocator::JsonAllocator()
+	: head(nullptr)
+{}
+
 JsonAllocator::~JsonAllocator() {
 	deallocate();
 }
