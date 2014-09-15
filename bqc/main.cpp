@@ -1,7 +1,13 @@
 #include <GLFW/glfw3.h>
-
+#include "config.h"
+#include <stdio.h>
 int main(void)
 {
+
+
+
+
+	return 0;
     GLFWwindow* window;
 
     /* Initialize the library */
