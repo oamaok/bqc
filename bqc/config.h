@@ -1,13 +1,14 @@
 #ifndef CONFIG_H_
 #define CONFIG_H_
 
-namespace Config 
+#include "json\parser.h"
+
+class Config
 {
-	namespace map
-	{
-		const int width = 40;
-		const int height = 40;
-	}
-}
+public:
+	template<typename T> static T get(std::string key);
+private:
+	static void init();
+};
 
 #endif

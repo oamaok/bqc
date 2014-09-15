@@ -33,6 +33,12 @@
     <ClCompile Include="tile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="json\parser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="config.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="config.h">
@@ -51,6 +57,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="side.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="json\parser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

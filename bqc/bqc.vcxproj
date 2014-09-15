@@ -67,6 +67,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="config.cpp" />
+    <ClCompile Include="json\parser.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="map.cpp" />
     <ClCompile Include="player.cpp" />
@@ -76,6 +78,7 @@
   <ItemGroup>
     <ClInclude Include="config.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="json\parser.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="side.h" />
