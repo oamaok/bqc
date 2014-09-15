@@ -2,7 +2,7 @@
 #include "config.h"
 
 Game::Game()
-	: map(Config::map::width, Config::map::height)
+	: map(Config::get<int>("map.width"), Config::get<int>("map.height"))
 {
 
 }
