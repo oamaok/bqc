@@ -1,6 +1,7 @@
 #include "config.h"
+#include <stdio.h>
 
-std::unordered_map<std::string, cJSON*> Config::jsonSources = std::unordered_map<std::string, cJSON*>();
+std::unordered_map<std::string, std::shared_ptr<cJSON>> Config::jsonSources = std::unordered_map<std::string, std::shared_ptr<cJSON>>();
 
 
 cJSON* Config::findNode(std::string key)
@@ -13,24 +14,25 @@ cJSON* Config::findNode(std::string key)
 	if(search == Config::jsonSources.end())
 	{
 		cJSON* rootNode = cJSON_Parse(util::readFile(filename).c_str());
-		Config::jsonSources[filename] = rootNode;
+		Config::jsonSources[filename].reset(rootNode, cJSON_Delete);
 		search = Config::jsonSources.find(filename);
 	}
 
-	cJSON* currentNode = search->second;
-	bool returnValue = false;
-	while(!returnValue)
+	cJSON* currentNode = search->second.get();
+	bool canExit = false;
+	while(!canExit)
 	{
 		if((delimeterPos = key.find(".")) == std::string::npos)
-			returnValue = true;
+			canExit = true;
 		int size = cJSON_GetArraySize(currentNode);
+		
 		for(int i = 0; i < size; i++)
 		{
 			cJSON* item = cJSON_GetArrayItem(currentNode, i);
 			if(strcmp(item->string, key.substr(0, delimeterPos).c_str()) == 0)
 			{
 				currentNode = item;
-				if(returnValue)
+				if(canExit)
 					return currentNode;
 				break;
 			}

@@ -1,15 +1,15 @@
 #ifndef CONFIG_H_
 #define CONFIG_H_
 
+#include <memory>
 #include <string>
 #include <unordered_map>
 #include <vector>
-#include "json\cJSON.h"
-#include "util.h"
 #include <iostream>
 #include <fstream>
 
-#include <stdio.h>
+#include "json\cJSON.h"
+#include "util.h"
 
 class Config
 {
@@ -17,7 +17,7 @@ public:
 	template <typename T> static T get(std::string key);
 private:
 	static cJSON* findNode(std::string key);
-	static std::unordered_map<std::string, cJSON*> jsonSources;
+	static std::unordered_map<std::string, std::shared_ptr<cJSON>> jsonSources;
 };
 
 
