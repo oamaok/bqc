@@ -66,14 +66,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="game.cpp" />
     <ClCompile Include="config.cpp" />
+    <ClCompile Include="game.cpp" />
     <ClCompile Include="json\parser.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="map.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="tile.cpp" />
     <ClCompile Include="tiles.cpp" />
+    <ClCompile Include="util.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="config.h" />
@@ -84,6 +85,9 @@
     <ClInclude Include="side.h" />
     <ClInclude Include="tile.h" />
     <ClInclude Include="util.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Debug\cfg\global.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

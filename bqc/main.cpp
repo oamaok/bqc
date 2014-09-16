@@ -1,10 +1,11 @@
 #include <GLFW/glfw3.h>
 #include "config.h"
 #include <stdio.h>
+
 int main(void)
 {
 
-
+	printf("%d", Config::get<int>("global.map.width"));
 
 
 	return 0;
