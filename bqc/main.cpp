@@ -6,7 +6,7 @@ int main(void)
 {
 
 	printf("%d", Config::get<int>("global.map.width"));
-
+	getchar();
 
 	return 0;
     GLFWwindow* window;

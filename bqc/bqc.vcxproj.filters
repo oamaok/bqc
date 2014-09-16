@@ -33,13 +33,13 @@
     <ClCompile Include="tile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="json\parser.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="util.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="config.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="json\cJSON.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -62,14 +62,15 @@
     <ClInclude Include="side.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="json\parser.h">
+    <ClInclude Include="util.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="util.h">
+    <ClInclude Include="json\cJSON.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Debug\cfg\global.json" />
+    <None Include="cfg\global.json" />
   </ItemGroup>
 </Project>

@@ -2,16 +2,18 @@
 #define UTIL_H_
 
 #include <string>
-#include "json\parser.h"
+#include "json/cJSON.h"
 
 namespace util
 {
-	template <typename T> T jsonCast(JsonValue value);
-	template <> int jsonCast<int>(JsonValue value);
-	template <> std::string jsonCast<std::string>(JsonValue value);
-	template <> bool jsonCast<bool>(JsonValue value);
-	template <> float jsonCast<float>(JsonValue value);
-	template <> double jsonCast<double>(JsonValue value);
+	template <typename T> T jsonCast(cJSON* value);
+	template <> int jsonCast<int>(cJSON* value);
+	template <> std::string jsonCast<std::string>(cJSON* value);
+	template <> bool jsonCast<bool>(cJSON* value);
+	template <> float jsonCast<float>(cJSON* value);
+	template <> double jsonCast<double>(cJSON* value);
+
+	std::string readFile(const std::string& path);
 }
 
 
