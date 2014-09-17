@@ -87,7 +87,7 @@
     <ClInclude Include="util.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="cfg\global.json" />
+    <None Include="cfg\map.json" />
     <None Include="Debug\cfg\global.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -71,6 +71,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Debug\cfg\global.json" />
-    <None Include="cfg\global.json" />
+    <None Include="cfg\map.json" />
   </ItemGroup>
 </Project>

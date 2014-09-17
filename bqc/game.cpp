@@ -1,7 +1,7 @@
 #include "game.h"
 
 Game::Game()
-	: map(40,40)
+	: map(Config::get<int>("map.width"), Config::get<int>("map.height"))
 {
 
 }
