@@ -1,0 +1,50 @@
+{
+	"normal" : {
+		"texture" : [0,0],
+		"collides" : true,
+		"movable" : true
+	},
+
+	"gravity" : {
+		"texture" : [0,1],
+		"collides" : true,
+		"movable" : true,
+		"onHit" : {
+			"me" : {
+				"switchGravity" : true
+			}
+		}
+	},
+
+	"spike" : {
+		"texture" : [0,2],
+		"collides" : true,
+		"movable" : true,
+		"onHit" : {
+			"me" : {
+				"kill" : true
+			}
+		}
+	},
+
+	"door" : {
+		"texture" : [0,3],
+		"collides" : true,
+		"movable" : false,
+		"visible" : true,
+	},
+
+	"button" : {
+		"texture" : [1,0],
+		"collides" : false,
+		"movable" : true,
+		"onHit" : {
+			"door" : {
+				"toggle" : ["collides", "visible"]
+			},
+			"this" : {
+				"texture" : [1,1]
+			}
+		}
+	}
+}

@@ -5,8 +5,7 @@
 #include <functional>
 #include <vector>
 
-#include "player.h"
-#include "side.h"
+#include "entities/player.h"
 
 class Tile
 {
@@ -14,16 +13,15 @@ public:
 	Tile();
 	~Tile();
 	void update();
-	static void addTile(Tile tile);
+	void render();
 
+	void onHit();
+	
 private:
 	std::string name;
-	float friction;
 	bool collides;
 	bool movable;
-	std::function<void(Player* player, const Side side)> onHit;
-	
-	static std::vector<Tile> tiles;
+	int texture[2];
 };
 
 #endif

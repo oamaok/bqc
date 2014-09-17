@@ -66,28 +66,35 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="events\Event.cpp" />
+    <ClCompile Include="physics\physics.cpp" />
+    <ClCompile Include="events\EventQueue.cpp" />
+    <ClCompile Include="tiles\Tile.cpp" />
     <ClCompile Include="util\config.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="json\cJSON.c" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="map.cpp" />
-    <ClCompile Include="player.cpp" />
-    <ClCompile Include="tile.cpp" />
-    <ClCompile Include="tiles.cpp" />
+    <ClCompile Include="entities\map.cpp" />
+    <ClCompile Include="entities\player.cpp" />
     <ClCompile Include="util\util.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="events\Event.h" />
+    <ClInclude Include="physics\aabb.h" />
+    <ClInclude Include="physics\physics.h" />
+    <ClInclude Include="events\EventQueue.h" />
+    <ClInclude Include="tiles\Tile.h" />
     <ClInclude Include="util\config.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="json\cJSON.h" />
-    <ClInclude Include="map.h" />
-    <ClInclude Include="player.h" />
+    <ClInclude Include="entities\map.h" />
+    <ClInclude Include="entities\player.h" />
     <ClInclude Include="side.h" />
-    <ClInclude Include="tile.h" />
     <ClInclude Include="util\util.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cfg\map.json" />
+    <None Include="cfg\tiles.json" />
     <None Include="Debug\cfg\global.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

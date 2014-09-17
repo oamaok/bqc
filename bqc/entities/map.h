@@ -3,7 +3,7 @@
 
 
 #include <vector>
-#include "tile.h"
+#include "tiles/Tile.h"
 
 class Map
 {
@@ -12,6 +12,7 @@ public:
 	~Map();
 
 	void update();
+	void render();
 private:
 	const int width;
 	const int height;

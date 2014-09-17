@@ -21,3 +21,15 @@ void Map::update()
 		tile->update();
 	}
 }
+
+void Map::render()
+{
+	for(Tile* tile : tiles)
+	{
+		if(tile == nullptr)
+			continue;
+
+		tile->render();
+	}
+
+}

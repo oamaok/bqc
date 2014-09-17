@@ -3,8 +3,8 @@
 
 
 #include "util/config.h"
-#include "map.h"
-#include "player.h"
+#include "entities/map.h"
+#include "entities/player.h"
 
 
 class Game
