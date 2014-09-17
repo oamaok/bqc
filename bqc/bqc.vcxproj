@@ -75,7 +75,7 @@
     <ClCompile Include="json\cJSON.c" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="entities\map.cpp" />
-    <ClCompile Include="entities\player.cpp" />
+    <ClCompile Include="player\player.cpp" />
     <ClCompile Include="util\util.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -88,7 +88,7 @@
     <ClInclude Include="game.h" />
     <ClInclude Include="json\cJSON.h" />
     <ClInclude Include="entities\map.h" />
-    <ClInclude Include="entities\player.h" />
+    <ClInclude Include="player\player.h" />
     <ClInclude Include="side.h" />
     <ClInclude Include="util\util.h" />
   </ItemGroup>

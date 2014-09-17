@@ -2,11 +2,10 @@
 #define EVENT_H_
 
 class Event {
-	
+public:
 	enum Type {
-		PLAYER_SWITCH_GRAVITY,
-		PLAYER_KILL,
-		TILE_UPDATE,
+		PLAYER_EVENT,
+		TILE_EVENT,
 	};
 
 	Type type;

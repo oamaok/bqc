@@ -5,7 +5,7 @@
 #include <functional>
 #include <vector>
 
-#include "entities/player.h"
+#include "player/player.h"
 
 class Tile
 {

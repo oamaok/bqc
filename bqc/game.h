@@ -4,7 +4,7 @@
 
 #include "util/config.h"
 #include "entities/map.h"
-#include "entities/player.h"
+#include "player/player.h"
 
 
 class Game
