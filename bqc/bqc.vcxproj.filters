@@ -33,20 +33,17 @@
     <ClCompile Include="tile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="util.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="config.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="json\cJSON.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="util\util.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="util\config.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="config.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -62,10 +59,13 @@
     <ClInclude Include="side.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="util.h">
+    <ClInclude Include="json\cJSON.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="json\cJSON.h">
+    <ClInclude Include="util\util.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util\config.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

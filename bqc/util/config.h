@@ -8,7 +8,7 @@
 #include <iostream>
 #include <fstream>
 
-#include "json\cJSON.h"
+#include "json/cJSON.h"
 #include "util.h"
 
 class Config

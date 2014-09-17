@@ -39,7 +39,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\cpp\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\cpp\include;$(ProjectDir);$(IncludePath)</IncludePath>
     <LibraryPath>C:\cpp\libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -66,7 +66,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="config.cpp" />
+    <ClCompile Include="util\config.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="json\cJSON.c" />
     <ClCompile Include="main.cpp" />
@@ -74,17 +74,17 @@
     <ClCompile Include="player.cpp" />
     <ClCompile Include="tile.cpp" />
     <ClCompile Include="tiles.cpp" />
-    <ClCompile Include="util.cpp" />
+    <ClCompile Include="util\util.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="config.h" />
+    <ClInclude Include="util\config.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="json\cJSON.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="side.h" />
     <ClInclude Include="tile.h" />
-    <ClInclude Include="util.h" />
+    <ClInclude Include="util\util.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cfg\map.json" />

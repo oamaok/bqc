@@ -2,7 +2,7 @@
 #define GAME_H_
 
 
-#include "config.h"
+#include "util/config.h"
 #include "map.h"
 #include "player.h"
 

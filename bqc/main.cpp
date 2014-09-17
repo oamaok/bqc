@@ -1,5 +1,5 @@
 #include <GLFW/glfw3.h>
-#include "config.h"
+#include "util/config.h"
 #include <stdio.h>
 
 int main(void)
