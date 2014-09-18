@@ -5,8 +5,8 @@
 
 namespace physics
 {
-	bool intersects(AABB a, AABB b);
-	glm::vec2 minimumTranslation(AABB a, AABB b);
+	bool intersects(const AABB& a, const AABB& b);
+	glm::vec2 minimumTranslation(const AABB& a, const AABB& b);
 }
 
 #endif

@@ -2,7 +2,7 @@
 
 namespace physics
 {
-	bool intersects(AABB a, AABB b)
+	bool intersects(const AABB& a, const AABB& b)
 	{
 		return !(a.max.x < b.min.x ||
 			a.max.y < b.min.y ||
@@ -10,7 +10,7 @@ namespace physics
 			a.min.y > b.max.y);
 	}
 
-	glm::vec2 minimumTranslation(AABB a, AABB b)
+	glm::vec2 minimumTranslation(const AABB& a, const AABB& b)
 	{
 		glm::vec2 amin = a.min;
         glm::vec2 amax = a.max;

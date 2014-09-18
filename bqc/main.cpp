@@ -1,9 +1,17 @@
 #include <GLFW/glfw3.h>
 #include "util/config.h"
+#include "events/EventQueue.h"
 #include <stdio.h>
+
+EventQueue gEventQueue;
 
 int main(void)
 {
+
+
+
+	return 0;
+
     GLFWwindow* window;
 
     /* Initialize the library */
