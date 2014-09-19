@@ -9,7 +9,7 @@ public:
 		TILE_EVENT,
 		PRINT_EVENT
 	};
-
+	virtual ~Event(){};
 	virtual Event::Type getType() const = 0;
 };
 

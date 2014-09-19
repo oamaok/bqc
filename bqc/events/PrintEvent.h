@@ -14,4 +14,5 @@ public:
 		: data(data)
 	{
 	}
+
 };

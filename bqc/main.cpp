@@ -7,7 +7,7 @@
 
 EventQueue gEventQueue;
 
-void testListener(const PrintEvent* evt)
+void testListener(PrintEvent* evt)
 {
 	printf(evt->data.c_str());
 }
@@ -17,9 +17,9 @@ int main(void)
 
 	gEventQueue.addEventListener<PrintEvent>(testListener);
 
-	PrintEvent asd("ebin");
+	PrintEvent* asd = new PrintEvent("ebin");
 
-	gEventQueue.sendEvent(&asd);
+	gEventQueue.sendEvent(asd);
 	gEventQueue.processEvents();
 
 	getchar();
