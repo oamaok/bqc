@@ -2,27 +2,33 @@
 
 #include "events/EventQueue.h"
 #include "events/PrintEvent.h"
+#include "events/EngineEvent.h"
 
 #include <stdio.h>
 
 EventQueue gEventQueue;
 
-void testListener(PrintEvent* evt)
-{
-	printf(evt->data.c_str());
-}
 
 int main(void)
 {
+	bool running = true;
 
-	gEventQueue.addEventListener<PrintEvent>(testListener);
+	gEventQueue.addEventListener<EngineEvent>([&](EngineEvent* evt){
+		if(evt->signal == EngineEvent::SIGNAL_STOP)
+		{
+			running = false;
+		}
+	});
+	
+	EngineEvent* stop = new EngineEvent(EngineEvent::SIGNAL_STOP);
+	while(running)
+	{
+		char a = getchar();
+		if(a == 'a')
+			gEventQueue.sendEvent(stop);
 
-	PrintEvent* asd = new PrintEvent("ebin");
-
-	gEventQueue.sendEvent(asd);
-	gEventQueue.processEvents();
-
-	getchar();
+		gEventQueue.processEvents();
+	}
 
 	return 0;
 }

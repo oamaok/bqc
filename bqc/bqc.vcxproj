@@ -79,6 +79,7 @@
     <ClCompile Include="util\util.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="events\EngineEvent.h" />
     <ClInclude Include="events\Event.h" />
     <ClInclude Include="events\PrintEvent.h" />
     <ClInclude Include="physics\aabb.h" />

@@ -4,12 +4,11 @@
 class PrintEvent : public Event 
 {
 public:
+	EVENT_TYPE(Event::PRINT_EVENT)
 
+
+		
 	std::string data;
-
-	static const Type type = Event::PRINT_EVENT;
-	Event::Type getType() const { return type; }
-
 	PrintEvent(const std::string& data)
 		: data(data)
 	{

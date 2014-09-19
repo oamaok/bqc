@@ -89,6 +89,9 @@
     <ClInclude Include="events\PrintEvent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="events\EngineEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Debug\cfg\global.json" />
