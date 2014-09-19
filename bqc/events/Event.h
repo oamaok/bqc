@@ -4,13 +4,13 @@
 class Event {
 public:
 	enum Type {
+		BASE_EVENT,
 		PLAYER_EVENT,
 		TILE_EVENT,
+		PRINT_EVENT
 	};
 
-	Type type;
-
-
+	virtual Event::Type getType() const = 0;
 };
 
 #endif

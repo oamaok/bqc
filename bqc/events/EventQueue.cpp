@@ -1,30 +1,22 @@
 #include "events/EventQueue.h"
 
-void EventQueue::addEventListener(Event::Type type, std::function<void(Event evt)> callback)
-{
-	EventListener listener = {type, callback};
-	eventListeners.push_back(listener);
-}
+
 
 void EventQueue::processEvents()
 {
-	Event evt;
 	while(!queue.empty())
 	{
-		evt = queue.front();
-		queue.erase(queue.begin());
+		const Event* evt = queue.front();
+		queue.pop_front();
 
-		for(EventListener listener : eventListeners)
+		for(auto& listener : eventListeners[evt->getType()])
 		{
-			if(listener.type == evt.type)
-			{
-				listener.callback(evt);
-			}
+			listener(evt);
 		}
 	}
 }
 
-void EventQueue::pushEvent(Event evt)
+void EventQueue::sendEvent(const Event* evt)
 {
 	queue.push_back(evt);
 }

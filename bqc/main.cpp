@@ -1,46 +1,28 @@
-#include <GLFW/glfw3.h>
 #include "util/config.h"
+
 #include "events/EventQueue.h"
+#include "events/PrintEvent.h"
+
 #include <stdio.h>
 
 EventQueue gEventQueue;
 
+void testListener(const PrintEvent* evt)
+{
+	printf(evt->data.c_str());
+}
+
 int main(void)
 {
 
+	gEventQueue.addEventListener<PrintEvent>(testListener);
 
+	PrintEvent asd("ebin");
+
+	gEventQueue.sendEvent(&asd);
+	gEventQueue.processEvents();
+
+	getchar();
 
 	return 0;
-
-    GLFWwindow* window;
-
-    /* Initialize the library */
-    if (!glfwInit())
-        return -1;
-
-    /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(640, 480, "BQC", NULL, NULL);
-    if (!window)
-    {
-        glfwTerminate();
-        return -1;
-    }
-
-    /* Make the window's context current */
-    glfwMakeContextCurrent(window);
-
-    /* Loop until the user closes the window */
-    while (!glfwWindowShouldClose(window))
-    {
-        /* Render here */
-
-        /* Swap front and back buffers */
-        glfwSwapBuffers(window);
-
-        /* Poll for and process events */
-        glfwPollEvents();
-    }
-
-    glfwTerminate();
-    return 0;
 }

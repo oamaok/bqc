@@ -80,6 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="events\Event.h" />
+    <ClInclude Include="events\PrintEvent.h" />
     <ClInclude Include="physics\aabb.h" />
     <ClInclude Include="physics\physics.h" />
     <ClInclude Include="events\EventQueue.h" />
