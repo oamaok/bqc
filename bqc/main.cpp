@@ -21,6 +21,7 @@ int main(void)
 	});
 	
 	EngineEvent* stop = new EngineEvent(EngineEvent::SIGNAL_STOP);
+
 	while(running)
 	{
 		char a = getchar();

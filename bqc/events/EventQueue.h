@@ -19,7 +19,7 @@ private:
 	std::deque<Event*> queue;
 };
 
-template <typename EventT, typename FunctionT> void EventQueue::addEventListener(FunctionT& callback)
+template <typename EventT, typename FunctionT> void EventQueue::addEventListener(FunctionT callback)
 {
 	eventListeners[EventT::type].push_back([=](Event* evt){
 		callback(static_cast<EventT*>(evt));

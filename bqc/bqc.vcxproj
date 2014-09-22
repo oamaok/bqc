@@ -67,6 +67,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="events\Event.cpp" />
+    <ClCompile Include="json\Json.cpp" />
     <ClCompile Include="physics\physics.cpp" />
     <ClCompile Include="events\EventQueue.cpp" />
     <ClCompile Include="tiles\Tile.cpp" />
@@ -82,10 +83,12 @@
     <ClInclude Include="events\EngineEvent.h" />
     <ClInclude Include="events\Event.h" />
     <ClInclude Include="events\PrintEvent.h" />
+    <ClInclude Include="json\Json.h" />
     <ClInclude Include="physics\aabb.h" />
     <ClInclude Include="physics\physics.h" />
     <ClInclude Include="events\EventQueue.h" />
     <ClInclude Include="tiles\Tile.h" />
+    <ClInclude Include="tiles\TileResourceLoader.h" />
     <ClInclude Include="util\config.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="json\cJSON.h" />
