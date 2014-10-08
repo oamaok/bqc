@@ -10,7 +10,7 @@
 
 class EventQueue {
 public:
-	template <typename EventT, typename FunctionT> void addEventListener(FunctionT& callback);
+	template <typename EventT, typename FunctionT> void addEventListener(FunctionT callback);
 	void sendEvent(Event* evt);
 	void processEvents();
 	

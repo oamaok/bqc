@@ -27,7 +27,7 @@ namespace util
 		if(value->type == cJSON_False || value->type == cJSON_NULL)
 			return false;
 		if(value->type == cJSON_Object || value->type == cJSON_Array)
-			return (bool)cJSON_GetArraySize(value);
+			return cJSON_GetArraySize(value) != 0;
 		if (value->type == cJSON_Number && value->valueint == 0)
 			return false;
 		return true;
