@@ -21,7 +21,7 @@
 		"collides" : true,
 		"movable" : true,
 		"onHit" : {
-			"me" : {
+			"me" : {,
 				"kill" : true
 			}
 		}

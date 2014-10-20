@@ -1,5 +1,6 @@
 #include "json/Json.h"
 #include "util/Util.h"
+#include "util/Log.h"
 
 std::unordered_map<std::string, std::shared_ptr<cJSON>> Json::rootNodes;
 
@@ -13,9 +14,15 @@ cJSON* Json::loadJson(const std::string& path)
 	auto search = Json::rootNodes.find(path);
 	if(search == Json::rootNodes.end())
 	{
-		cJSON* rootNode = cJSON_Parse(util::readFile(path).c_str());
+		std::string fileContents = util::readFile(path);
+		cJSON* rootNode = cJSON_Parse(fileContents.c_str());
 		if(!rootNode)
+		{
+			const char* errptr = cJSON_GetErrorPtr();
+			int line = std::count(fileContents.c_str(), errptr, '\n') + 1;
+			Log::error("Failed to parse JSON %s:%d.", path.c_str(), line);
 			return nullptr;
+		}
 
 		Json::rootNodes[path].reset(rootNode, cJSON_Delete);
 		return rootNode;
@@ -23,6 +30,8 @@ cJSON* Json::loadJson(const std::string& path)
 
 	return search->second.get();
 }
+
+
 
 cJSON* Json::findNode(const std::string& path, std::string key)
 {
@@ -86,6 +95,7 @@ std::vector<std::string> Json::getChildNames(const std::string& path, std::strin
 std::vector<cJSON*> Json::getChildren(const std::string& path, std::string key)
 {
 	cJSON* node = Json::findNode(path, key);
+
 	int size = cJSON_GetArraySize(node);
 	
 	std::vector<cJSON*> ret;

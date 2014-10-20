@@ -28,16 +28,8 @@ int main(void)
 	while(running)
 	{
 		
-		auto children = Json::getChildNames("cfg/tiles.json", "gravity");
-		for(auto child : children)
-		{
-			printf("%s\n", child.c_str());
-		}
-		Log::print("kekkonen");
-		Log::error("%d", 20);
-		Log::warning("fagerholm");
-		
-		getchar();
+		Json::loadJson("cfg/tiles.json");
+
 		gEventQueue.sendEvent(stop);
 		gEventQueue.processEvents();
 	}
