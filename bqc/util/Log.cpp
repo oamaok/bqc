@@ -33,28 +33,18 @@ void Log::warning(const char* format, ...)
 	va_end(args);
 }
 
-void Log::_print(const std::string& prefixString, const char* format, va_list args)
+void Log::_print(const char* prefixString, const char* format, va_list args)
 {
-	
-	char *dst = new char[500];
-	vsnprintf(dst, 500, format, args);
-	
+	char buffer[Log::MAX_LENGTH];
+	char *ptr = buffer;
+
 	time_t rawtime;
 	struct tm * timeinfo;
-
 	time (&rawtime);
 	timeinfo = localtime(&rawtime);
 
-	char *time = new char[100];
-	snprintf(time, 100, "[%02d:%02d:%02d] %s ", timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec, prefixString.c_str());
-	
-	char *concatted = new char[600];
-	strcpy(concatted, time);
-	strcat(concatted, dst);
+	ptr += snprintf(ptr, Log::MAX_LENGTH - (ptr - buffer), "[%02d:%02d:%02d] %s ", timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec, prefixString);
+	ptr += vsnprintf(ptr, Log::MAX_LENGTH - (ptr - buffer), format, args);
 
-	util::writeLine("debug.log", std::string(concatted));
-
-	delete [] dst;
-	delete [] time;
-	delete [] concatted;
+	util::writeLine("debug.log", std::string(buffer));
 }
