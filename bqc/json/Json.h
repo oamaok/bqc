@@ -19,26 +19,25 @@ public:
 		TYPE_OBJECT
 	};
 
-	static JsonType typeOf(const std::string path, const std::string key);
-	static cJSON* loadJson(const std::string path);
-	static cJSON* findNode(const std::string path, const std::string key);
-	template <typename T> static T get(const std::string path, const std::string key);
-	static std::vector<std::string> getChildren(const std::string path, const std::string key);
-	static int getLength(const std::string path, const std::string key);
+	static JsonType typeOf(const std::string& path, std::string key);
+	static cJSON* loadJson(const std::string& path);
+	static cJSON* findNode(const std::string& path, std::string key);
+	template <typename T> static T get(const std::string& path, std::string key);
+	static std::vector<std::string> getChildNames(const std::string& path, std::string key);
+	static std::vector<cJSON*> getChildren(const std::string& path, std::string key);
+	static int getLength(const std::string& path, std::string key);
 
 private:
 	static std::unordered_map<std::string, std::shared_ptr<cJSON>> rootNodes;
 };
 
 
-template <typename T> T Json::get(std::string key)
+template <typename T> T Json::get(const std::string& path, std::string key)
 {
-	cJSON* node = Json::findNode(key);
+	cJSON* node = Json::findNode(path, key);
 	if(node == nullptr)
 		return T();
 	return util::jsonCast<T>(node);
 }
-
-
 
 #endif

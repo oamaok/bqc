@@ -31,7 +31,7 @@
 		"texture" : [0,3],
 		"collides" : true,
 		"movable" : false,
-		"visible" : true,
+		"visible" : true
 	},
 
 	"button" : {

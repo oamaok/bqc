@@ -14,6 +14,7 @@ namespace util
 	template <> double jsonCast<double>(cJSON* value);
 
 	std::string readFile(const std::string& path);
+	void writeLine(const std::string& path, std::string line);
 }
 
 

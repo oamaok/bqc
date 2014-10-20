@@ -1,17 +1,22 @@
 #include "json/Json.h"
 #include "util/Util.h"
 
-Json::JsonType Json::typeOf(const std::string path, const std::string key)
-{
+std::unordered_map<std::string, std::shared_ptr<cJSON>> Json::rootNodes;
 
+Json::JsonType Json::typeOf(const std::string& path, std::string key)
+{
+	return Json::JsonType::TYPE_NULL;
 }
 
-cJSON* Json::loadJson(const std::string path)
+cJSON* Json::loadJson(const std::string& path)
 {
 	auto search = Json::rootNodes.find(path);
 	if(search == Json::rootNodes.end())
 	{
 		cJSON* rootNode = cJSON_Parse(util::readFile(path).c_str());
+		if(!rootNode)
+			return nullptr;
+
 		Json::rootNodes[path].reset(rootNode, cJSON_Delete);
 		return rootNode;
 	}
@@ -19,10 +24,15 @@ cJSON* Json::loadJson(const std::string path)
 	return search->second.get();
 }
 
-cJSON* Json::findNode(const std::string path, std::string key)
+cJSON* Json::findNode(const std::string& path, std::string key)
 {
 	// load the root node for path
 	cJSON* currentNode = Json::loadJson(path);
+
+	// empty key: return root node
+	if(key.length() == 0)
+		return currentNode;
+
 	bool canExit = false;
 	int delimeterPos;
 	while(!canExit)
@@ -49,7 +59,7 @@ cJSON* Json::findNode(const std::string path, std::string key)
 	return nullptr;
 }
 
-int Json::getLength(std::string path, std::string key)
+int Json::getLength(const std::string& path, std::string key)
 {
 	cJSON* node = Json::findNode(path, key);
 	if(node->type != cJSON_Array || node->type != cJSON_Object)
@@ -57,7 +67,34 @@ int Json::getLength(std::string path, std::string key)
 	return cJSON_GetArraySize(node);
 }
 
-std::vector<std::string> Json::getChildren(std::string path, std::string key)
+std::vector<std::string> Json::getChildNames(const std::string& path, std::string key)
 {
 	cJSON* node = Json::findNode(path, key);
+	int size = cJSON_GetArraySize(node);
+	
+	std::vector<std::string> ret;
+
+	for(int i = 0; i < size; i++)
+	{
+		cJSON* item = cJSON_GetArrayItem(node, i);
+		ret.push_back(item->string);
+	}
+
+	return ret;
+}
+
+std::vector<cJSON*> Json::getChildren(const std::string& path, std::string key)
+{
+	cJSON* node = Json::findNode(path, key);
+	int size = cJSON_GetArraySize(node);
+	
+	std::vector<cJSON*> ret;
+
+	for(int i = 0; i < size; i++)
+	{
+		cJSON* item = cJSON_GetArrayItem(node, i);
+		ret.push_back(item);
+	}
+
+	return ret;
 }

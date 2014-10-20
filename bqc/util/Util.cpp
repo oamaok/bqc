@@ -50,12 +50,23 @@ namespace util
 			exit(EXIT_FAILURE);
 		}
 		file.seekg(0, std::ios::end);
-		size_t size = file.tellg();
+		std::streamoff size = file.tellg();
 		std::string buffer(size, '\0');
 		file.seekg(0);
 		file.read(&buffer[0], size); 
-
+		file.close();
 		return buffer;
+	}
+	void writeLine(const std::string& path, std::string line)
+	{
+		std::ofstream file(path, std::ostream::binary | std::ostream::app);
+
+		if(!file)
+		{
+			exit(EXIT_FAILURE);
+		}
+		file << line << "\r\n";
+		file.close();
 	}
 }
 
