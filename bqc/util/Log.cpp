@@ -11,60 +11,33 @@
 
 void Log::print(const char* format, ...)
 {
-	char dst[500];
 	va_list args;
-    va_start(args, format);
-	vsnprintf(dst, 500, format, args);
-    va_end(args);
-	
-	time_t rawtime;
-	struct tm * timeinfo;
-
-	time (&rawtime);
-	timeinfo = localtime(&rawtime);
-
-	char time[32];
-
-	snprintf(time, 32, "[%02d:%02d:%02d] ", timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
-	
-	char concatted[532];
-	strcpy(concatted, time);
-	strcat(concatted, dst);
-
-	util::writeLine("debug.log", std::string(concatted));
+	va_start(args, format);
+	_print("", format, args);
+	va_end(args);
 }
 
 void Log::error(const char* format, ...)
 {
-	char dst[500];
 	va_list args;
-    va_start(args, format);
-	vsnprintf(dst, 500, format, args);
-    va_end(args);
-	
-	time_t rawtime;
-	struct tm * timeinfo;
-
-	time (&rawtime);
-	timeinfo = localtime(&rawtime);
-
-	char time[32];
-	snprintf(time, 32, "[%02d:%02d:%02d] [ERROR] ", timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
-	
-	char concatted[532];
-	strcpy(concatted, time);
-	strcat(concatted, dst);
-
-	util::writeLine("debug.log", std::string(concatted));
+	va_start(args, format);
+	_print("[ERROR]", format, args);
+	va_end(args);
 }
 
 void Log::warning(const char* format, ...)
 {
-	char dst[500];
 	va_list args;
-    va_start(args, format);
+	va_start(args, format);
+	_print("[WARNING]", format, args);
+	va_end(args);
+}
+
+void Log::_print(const std::string& prefixString, const char* format, va_list args)
+{
+	
+	char *dst = new char[500];
 	vsnprintf(dst, 500, format, args);
-    va_end(args);
 	
 	time_t rawtime;
 	struct tm * timeinfo;
@@ -72,12 +45,16 @@ void Log::warning(const char* format, ...)
 	time (&rawtime);
 	timeinfo = localtime(&rawtime);
 
-	char time[32];
-	snprintf(time, 32, "[%02d:%02d:%02d] [WARNING] ", timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
+	char *time = new char[100];
+	snprintf(time, 100, "[%02d:%02d:%02d] %s ", timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec, prefixString.c_str());
 	
-	char concatted[532];
+	char *concatted = new char[600];
 	strcpy(concatted, time);
 	strcat(concatted, dst);
 
 	util::writeLine("debug.log", std::string(concatted));
+
+	delete [] dst;
+	delete [] time;
+	delete [] concatted;
 }

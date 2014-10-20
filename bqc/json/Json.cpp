@@ -37,7 +37,7 @@ cJSON* Json::findNode(const std::string& path, std::string key)
 	int delimeterPos;
 	while(!canExit)
 	{
-		// check for delimeters
+		// check for delimeters; if none found, function is ready to exit
 		if((delimeterPos = key.find(".")) == std::string::npos)
 			canExit = true;
 		int size = cJSON_GetArraySize(currentNode);
