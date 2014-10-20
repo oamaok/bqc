@@ -4,6 +4,11 @@
 #include "util/Log.h"
 #include "util/Util.h"
 
+// visual studio doesn't support snprintf, but has _snprintf instead, how convinient!
+#ifdef _MSC_VER
+	#define snprintf _snprintf
+#endif
+
 void Log::print(const char* format, ...)
 {
 	char dst[500];
@@ -20,9 +25,7 @@ void Log::print(const char* format, ...)
 
 	char time[32];
 
-	// too bad visual studio doesn't support snprintf, must prefix with an underscore!
-	// same with the other two cases of the function call.
-	_snprintf(time, 32, "[%02d:%02d:%02d] ", timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
+	snprintf(time, 32, "[%02d:%02d:%02d] ", timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
 	
 	char concatted[532];
 	strcpy(concatted, time);
@@ -46,7 +49,7 @@ void Log::error(const char* format, ...)
 	timeinfo = localtime(&rawtime);
 
 	char time[32];
-	_snprintf(time, 32, "[%02d:%02d:%02d] [ERROR] ", timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
+	snprintf(time, 32, "[%02d:%02d:%02d] [ERROR] ", timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
 	
 	char concatted[532];
 	strcpy(concatted, time);
@@ -70,7 +73,7 @@ void Log::warning(const char* format, ...)
 	timeinfo = localtime(&rawtime);
 
 	char time[32];
-	_snprintf(time, 32, "[%02d:%02d:%02d] [WARNING] ", timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
+	snprintf(time, 32, "[%02d:%02d:%02d] [WARNING] ", timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
 	
 	char concatted[532];
 	strcpy(concatted, time);
