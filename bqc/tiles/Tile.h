@@ -10,12 +10,12 @@
 class Tile
 {
 public:
-	Tile();
+	Tile(const std::string& name);
 	~Tile();
 	void update();
 	void render();
 
-	void onHit();
+	std::string getName();
 	
 private:
 	std::string name;

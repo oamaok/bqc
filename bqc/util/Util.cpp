@@ -1,4 +1,6 @@
-#include "util.h"
+#include "util/Util.h"
+#include "util/Log.h"
+
 #include <iostream>
 #include <fstream>
 namespace util
@@ -43,10 +45,12 @@ namespace util
 
 	std::string readFile(const std::string& path)
 	{
+		// TODO: caching for the file streams
 		std::ifstream file(path, std::ifstream::binary);
 
-		if(!file) // couldn't open file
+		if(!file)
 		{
+			Log::error("Couldn't open file '%s' for reading.", path.c_str());
 			exit(EXIT_FAILURE);
 		}
 		file.seekg(0, std::ios::end);

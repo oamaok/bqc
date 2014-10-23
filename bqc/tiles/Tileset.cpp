@@ -1,16 +1,46 @@
 #include "tiles/Tileset.h"
+#include "json/Json.h"
+#include "util/Log.h"
 
-Tile Tileset::getTile(int index)
+Tileset::Tileset(const std::string& name)
 {
-	tiles.at(index);
+	std::string path = "tilesets/" + name + ".json";
+
+	if(!Json::loadJson(path))
+	{
+		Log::error("Couldn't load tileset '%s'.", name.c_str());
+		return;
+	}
+
+	// get root node child names
+	std::vector<std::string> childNames = Json::getChildNames(path, "");
+
+	for(auto& childName : childNames)
+	{
+		Tile tile(childName);
+		tiles.push_back(tile);
+	}
 }
 
-Tile Tileset::getTile(std::string name)
+const Tile& Tileset::getTileByIndex(int index)
 {
-	
+	return tiles.at(index);
 }
 
-void Tileset::loadTileset(std::string path)
+const Tile& Tileset::getTileByName(const std::string& name)
 {
+	for(auto& tile : tiles)
+	{
+		if(tile.getName() == name)
+			return tile;
+	}
+}
 
+int Tileset::getTileIndex(const std::string& name)
+{
+	for(std::vector<Tile>::size_type i = 0; i != tiles.size(); i++)
+	{	
+		if(tiles[i].getName() == name)
+			return (int)i;
+	}
 }

@@ -10,7 +10,8 @@ void Tile::render()
 
 }
 
-Tile::Tile()
+Tile::Tile(const std::string& name)
+	: name(name)
 {
 
 }
@@ -18,4 +19,9 @@ Tile::Tile()
 Tile::~Tile()
 {
 
+}
+
+std::string Tile::getName()
+{
+	return name;
 }
