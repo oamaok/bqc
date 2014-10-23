@@ -43,7 +43,8 @@ void Log::_print(const char* prefixString, const char* format, va_list args)
 	time (&rawtime);
 	timeinfo = localtime(&rawtime);
 
-	ptr += snprintf(ptr, Log::MAX_LENGTH - (ptr - buffer), "[%02d:%02d:%02d] %s ", timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec, prefixString);
+	ptr += snprintf(ptr, Log::MAX_LENGTH - (ptr - buffer), "[%02d-%02d-%04d %02d:%02d:%02d] %s ",
+		timeinfo->tm_mday, timeinfo->tm_mon, timeinfo->tm_year + 1900, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec, prefixString);
 	ptr += vsnprintf(ptr, Log::MAX_LENGTH - (ptr - buffer), format, args);
 
 	util::writeLine("debug.log", std::string(buffer));

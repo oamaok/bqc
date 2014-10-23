@@ -20,7 +20,7 @@ cJSON* Json::loadJson(const std::string& path)
 		{
 			const char* errptr = cJSON_GetErrorPtr();
 			int line = std::count(fileContents.c_str(), errptr, '\n') + 1;
-			Log::error("Failed to parse JSON %s:%d.", path.c_str(), line);
+			Log::error("Failed to parse JSON: %s:%d", path.c_str(), line);
 			return nullptr;
 		}
 

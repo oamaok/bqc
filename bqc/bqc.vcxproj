@@ -71,6 +71,7 @@
     <ClCompile Include="physics\physics.cpp" />
     <ClCompile Include="events\EventQueue.cpp" />
     <ClCompile Include="tiles\Tile.cpp" />
+    <ClCompile Include="tiles\Tileset.cpp" />
     <ClCompile Include="util\config.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="json\cJSON.c" />
@@ -90,6 +91,7 @@
     <ClInclude Include="events\EventQueue.h" />
     <ClInclude Include="tiles\Tile.h" />
     <ClInclude Include="tiles\TileResourceLoader.h" />
+    <ClInclude Include="tiles\Tileset.h" />
     <ClInclude Include="util\config.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="json\cJSON.h" />

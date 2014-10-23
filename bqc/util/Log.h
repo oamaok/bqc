@@ -1,3 +1,6 @@
+#ifndef LOG_H_
+#define LOG_H_
+
 #include <string>
 #include <cstdarg>
 #include "util/util.h"
@@ -12,3 +15,5 @@ private:
 	static void _print(const char* prefixString, const char* format, va_list args);
 	static const int MAX_LENGTH = 1024;
 };
+
+#endif
