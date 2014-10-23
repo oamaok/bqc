@@ -9,9 +9,9 @@ class Tileset
 {
 public:
 	Tileset(const std::string& tilesetName);
-	const Tile& getTileByIndex(int index);
-	const Tile& getTileByName(const std::string& name);
-	int getTileIndex(const std::string& name);
+	const Tile& getTileByIndex(int index) const;
+	const Tile& getTileByName(const std::string& name) const;
+	int getTileIndex(const std::string& name) const;
 private:
 	std::vector<Tile> tiles;
 };

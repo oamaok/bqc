@@ -1,0 +1,25 @@
+{
+	"normal" : {
+		"texture" : [0,0],
+		"collides" : true,
+		"movable" : true
+	},
+	"spawn" : {
+		"texture" : [0,1],
+		"collides" : false,
+		"movable" : false,
+		"spawn" : true,
+		"require" : 1,
+		"limit": 1
+	},
+	"goal" : {
+		"texture" : [0,2],
+		"collides" : false,
+		"movable" : false,
+		"require" : 1,
+		"limit" : 1,
+		"onHit" : {
+			"endGame" : true
+		}
+	}
+}

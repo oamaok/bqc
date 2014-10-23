@@ -15,7 +15,7 @@ public:
 	void update();
 	void render();
 
-	std::string getName();
+	const std::string getName() const;
 	
 private:
 	std::string name;

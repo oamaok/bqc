@@ -90,7 +90,6 @@
     <ClInclude Include="physics\physics.h" />
     <ClInclude Include="events\EventQueue.h" />
     <ClInclude Include="tiles\Tile.h" />
-    <ClInclude Include="tiles\TileResourceLoader.h" />
     <ClInclude Include="tiles\Tileset.h" />
     <ClInclude Include="util\config.h" />
     <ClInclude Include="game.h" />
@@ -103,7 +102,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="cfg\map.json" />
-    <None Include="cfg\tiles.json" />
+    <None Include="tilesets\core.json" />
     <None Include="Debug\cfg\global.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

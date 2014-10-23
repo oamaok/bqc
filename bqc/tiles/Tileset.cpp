@@ -22,12 +22,12 @@ Tileset::Tileset(const std::string& name)
 	}
 }
 
-const Tile& Tileset::getTileByIndex(int index)
+const Tile& Tileset::getTileByIndex(int index) const
 {
 	return tiles.at(index);
 }
 
-const Tile& Tileset::getTileByName(const std::string& name)
+const Tile& Tileset::getTileByName(const std::string& name) const
 {
 	for(auto& tile : tiles)
 	{
@@ -36,7 +36,7 @@ const Tile& Tileset::getTileByName(const std::string& name)
 	}
 }
 
-int Tileset::getTileIndex(const std::string& name)
+int Tileset::getTileIndex(const std::string& name) const
 {
 	for(std::vector<Tile>::size_type i = 0; i != tiles.size(); i++)
 	{	

@@ -101,9 +101,6 @@
     <ClInclude Include="events\EngineEvent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="tiles\TileResourceLoader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="json\Json.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -117,6 +114,6 @@
   <ItemGroup>
     <None Include="Debug\cfg\global.json" />
     <None Include="cfg\map.json" />
-    <None Include="cfg\tiles.json" />
+    <None Include="tilesets\core.json" />
   </ItemGroup>
 </Project>

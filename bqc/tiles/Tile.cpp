@@ -21,7 +21,7 @@ Tile::~Tile()
 
 }
 
-std::string Tile::getName()
+const std::string Tile::getName() const
 {
 	return name;
 }
