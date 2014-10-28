@@ -4,7 +4,10 @@
 #include "events/EventQueue.h"
 #include "events/PrintEvent.h"
 #include "events/EngineEvent.h"
+
 #include "util/Log.h"
+#include "tiles/Tileset.h"
+
 #include <stdio.h>
 
 #define _CRT_SECURE_NO_WARNINGS
@@ -28,8 +31,12 @@ int main(void)
 	while(running)
 	{
 		
-		Json::loadJson("cfg/tiles.json");
-
+		Tileset ts("core");
+		for(const auto& name : ts.getTileNames())
+		{
+			printf("%s\n", name.c_str());
+		}
+		getchar();
 		gEventQueue.sendEvent(stop);
 		gEventQueue.processEvents();
 	}
