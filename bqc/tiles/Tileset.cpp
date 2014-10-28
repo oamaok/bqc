@@ -21,11 +21,11 @@ Tileset::Tileset(const std::string& name)
 
 		std::vector<std::string> childNames = Json::getChildNames(path, "tiles." + tileName);
 
-		setTileProperty<bool>(tileName, tile.collides, "collides", false);
-		setTileProperty<bool>(tileName, tile.movable, "movable", false);
-		setTileProperty<int>(tileName, tile.limit, "limit", 0);
-		setTileProperty<int>(tileName, tile.require, "require", 0);
-
+		setTileProperty<bool>(tile, tile.collides, "collides", false);
+		setTileProperty<bool>(tile, tile.movable, "movable", false);
+		setTileProperty<int>(tile, tile.limit, "limit", 0);
+		setTileProperty<int>(tile, tile.require, "require", 0);
+		setTilePropertyArray<int>(tile, tile.texture, 2, "texture");
 		tiles.push_back(tile);
 	}
 }

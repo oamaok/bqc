@@ -2,41 +2,43 @@
 #include "util/Util.h"
 #include "util/Log.h"
 
-std::unordered_map<std::string, std::shared_ptr<cJSON>> Json::rootNodes;
+Json::Json(const std::string& path)
+{
+	std::string fileContents = util::readFile(path);
+	rootNode = (std::shared_ptr<cJSON>)cJSON_Parse(fileContents.c_str());
+	if(!rootNode)
+	{
+		const char* errptr = cJSON_GetErrorPtr();
+		int line = std::count(fileContents.c_str(), errptr, '\n') + 1;
+		Log::error("Failed to parse JSON: %s:%d", path.c_str(), line);
+	}
+}
 
-Json::JsonType Json::typeOf(const std::string& path, std::string key)
+Json::JsonType Json::typeOf(std::string key)
 {
 	return Json::JsonType::TYPE_NULL;
 }
 
-cJSON* Json::loadJson(const std::string& path)
+Json& Json::loadJson(const std::string& path)
 {
-	auto search = Json::rootNodes.find(path);
-	if(search == Json::rootNodes.end())
+	auto search = jsonCache.find(path);
+
+	if(search == jsonCache.end())
 	{
-		std::string fileContents = util::readFile(path);
-		cJSON* rootNode = cJSON_Parse(fileContents.c_str());
-		if(!rootNode)
-		{
-			const char* errptr = cJSON_GetErrorPtr();
-			int line = std::count(fileContents.c_str(), errptr, '\n') + 1;
-			Log::error("Failed to parse JSON: %s:%d", path.c_str(), line);
-			return nullptr;
-		}
-
-		Json::rootNodes[path].reset(rootNode, cJSON_Delete);
-		return rootNode;
+		Json json(path);
+		jsonCache[path] = json;
+		return json;
 	}
-
-	return search->second.get();
+	
+	return search->second;
 }
 
 
 
-cJSON* Json::findNode(const std::string& path, std::string key)
+cJSON* Json::findNode(std::string key)
 {
 	// load the root node for path
-	cJSON* currentNode = Json::loadJson(path);
+	cJSON* currentNode = rootNode.get();
 
 	// empty key: return root node
 	if(key.length() == 0)
@@ -68,17 +70,17 @@ cJSON* Json::findNode(const std::string& path, std::string key)
 	return nullptr;
 }
 
-int Json::getLength(const std::string& path, std::string key)
+int Json::getLength(std::string key)
 {
-	cJSON* node = Json::findNode(path, key);
+	cJSON* node = Json::findNode(key);
 	if(node->type != cJSON_Array || node->type != cJSON_Object)
 		return 0;
 	return cJSON_GetArraySize(node);
 }
 
-std::vector<std::string> Json::getChildNames(const std::string& path, std::string key)
+std::vector<std::string> Json::getChildNames(std::string key)
 {
-	cJSON* node = Json::findNode(path, key);
+	cJSON* node = Json::findNode(key);
 	int size = cJSON_GetArraySize(node);
 	
 	std::vector<std::string> ret;
@@ -92,9 +94,9 @@ std::vector<std::string> Json::getChildNames(const std::string& path, std::strin
 	return ret;
 }
 
-std::vector<cJSON*> Json::getChildren(const std::string& path, std::string key)
+std::vector<cJSON*> Json::getChildren(std::string key)
 {
-	cJSON* node = Json::findNode(path, key);
+	cJSON* node = Json::findNode(key);
 
 	int size = cJSON_GetArraySize(node);
 	
