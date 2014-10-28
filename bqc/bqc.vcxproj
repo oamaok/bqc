@@ -72,12 +72,12 @@
     <ClCompile Include="events\EventQueue.cpp" />
     <ClCompile Include="tiles\Tile.cpp" />
     <ClCompile Include="tiles\Tileset.cpp" />
-    <ClCompile Include="util\config.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="json\cJSON.c" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="entities\map.cpp" />
     <ClCompile Include="player\player.cpp" />
+    <ClCompile Include="util\Config.cpp" />
     <ClCompile Include="util\Log.cpp" />
     <ClCompile Include="util\util.cpp" />
   </ItemGroup>

@@ -8,26 +8,24 @@
 #include <iostream>
 #include <fstream>
 
-#include "json/cJSON.h"
+#include "json/Json.h"
 #include "util.h"
 
 class Config
 {
 public:
 	template <typename T> static T get(std::string key);
-private:
-	static cJSON* findNode(std::string key);
-	static std::unordered_map<std::string, std::shared_ptr<cJSON>> jsonSources;
 };
 
 
-template <typename T> T Config::get(std::string key)
+template <typename T> static T Config::get(std::string key)
 {
-	cJSON* node = Config::findNode(key);
-	if(node == nullptr)
-		return T();
-	return util::jsonCast<T>(node);
+	int delimeterPos = key.find(".");
+	std::string file = key.substr(0, delimeterPos);
+	key = key.substr(delimeterPos + 1);
+	return Json::loadJson("cfg/" + file + ".json")->get<T>(key);
 }
+
 
 	
 #endif

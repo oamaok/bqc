@@ -19,28 +19,35 @@ public:
 		TYPE_OBJECT
 	};
 
-	Json(const std::string& path);
-	~Json();
+	enum JsonError {
+		NO_ERROR = -1,
+		PARSE_ERROR,
+	};
 
 	JsonType typeOf(std::string key);
-	static Json& loadJson(const std::string& path);
+	static std::shared_ptr<Json> loadJson(const std::string& path);
 	cJSON* findNode(std::string key);
-	template <typename T> const T get(std::string key);
 	std::vector<std::string> getChildNames(std::string key);
 	std::vector<cJSON*> getChildren(std::string key);
 	int getLength(std::string key);
+	template <typename T> const T get(std::string key);
+	
 	std::string getPath();
+	JsonError getError() { return error; };
+	operator bool() const { return error == JsonError::NO_ERROR; };
 private:
+	void setError(JsonError err) { error = err; };
+	Json(const std::string& path);
 	std::string path;
-	std::shared_ptr<cJSON> rootNode;
-
-	static std::unordered_map<std::string, Json> jsonCache;
+	cJSON* rootNode;
+	static std::unordered_map<std::string, std::shared_ptr<Json>> jsonCache;
+	JsonError error;
 };
 
 
 template <typename T> const T Json::get(std::string key)
 {
-	cJSON* node = Json::findNode(key);
+	cJSON* node = findNode(key);
 	if(node == nullptr)
 		return T();
 	return util::jsonCast<T>(node);

@@ -4,22 +4,24 @@
 
 Tileset::Tileset(const std::string& name)
 	: path("tilesets/" + name + ".json")
+	, json(Json::loadJson(path))
 {
-	if(!Json::loadJson(path))
+	if(!json)
 	{
 		Log::error("Couldn't load tileset '%s'.", name.c_str());
 		return;
 	}
-	this->name = Json::get<std::string>(path, "name");
-	this->author = Json::get<std::string>(path, "version");
+
+	this->name = json->get<std::string>("name");
+	this->author = json->get<std::string>("version");
 	// get tile names
-	std::vector<std::string> tileNames = Json::getChildNames(path, "tiles");
+	std::vector<std::string> tileNames = json->getChildNames("tiles");
 
 	for(auto& tileName : tileNames)
 	{
 		Tile tile(tileName);
 
-		std::vector<std::string> childNames = Json::getChildNames(path, "tiles." + tileName);
+		std::vector<std::string> childNames = json->getChildNames("tiles." + tileName);
 
 		setTileProperty<bool>(tile, tile.collides, "collides", false);
 		setTileProperty<bool>(tile, tile.movable, "movable", false);
@@ -53,6 +55,7 @@ int Tileset::getTileIndex(const std::string& name) const
 		if(tiles[i].getName() == name)
 			return (int)i;
 	}
+	return -1;
 }
 
 std::vector<std::string> Tileset::getTileNames()

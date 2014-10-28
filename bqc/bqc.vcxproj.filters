@@ -27,9 +27,6 @@
     <ClCompile Include="util\util.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="util\config.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="entities\map.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -55,6 +52,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="tiles\Tileset.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="util\Config.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

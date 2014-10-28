@@ -17,6 +17,8 @@ EventQueue gEventQueue;
 
 int main(void)
 {
+	// only test cases so far, ignore/modify as you like
+
 	bool running = true;
 
 	gEventQueue.addEventListener<EngineEvent>([&](EngineEvent* evt){
@@ -30,7 +32,7 @@ int main(void)
 
 	while(running)
 	{
-		
+		printf("%d\n", Config::get<int>("map.width"));
 		Tileset ts("core");
 		for(const auto& name : ts.getTileNames())
 		{

@@ -21,16 +21,18 @@ private:
 	std::string author;
 	std::vector<Tile> tiles;
 
+	std::shared_ptr<Json> json;
+
 	template <typename T> void setTileProperty(const Tile& tile, T& tileProp, const std::string& key, const T& defaultValue);
-	template <typename T> void setTilePropertyArray(const Tile& tile, T* tileProp, size_t size, const std::string& key);
+	template <typename T> void setTilePropertyArray(const Tile& tile, T* tileProp, int size, const std::string& key);
 };
 
 template <typename T> void Tileset::setTileProperty(const Tile& tile, T& tileProp, const std::string& key, const T& defaultValue)
 {
 	std::string fullKey = "tiles." + tile.name + "." + key;
-	if(Json::findNode(path, fullKey))
+	if(json->findNode(fullKey))
 	{
-		tileProp = Json::get<T>(path, fullKey);
+		tileProp = json->get<T>(fullKey);
 	}
 	else
 	{
@@ -39,13 +41,13 @@ template <typename T> void Tileset::setTileProperty(const Tile& tile, T& tilePro
 
 }
 
-template <typename T> void Tileset::setTilePropertyArray(const Tile& tile, T* tileProp, size_t size, const std::string& key)
+template <typename T> void Tileset::setTilePropertyArray(const Tile& tile, T* tileProp, int size, const std::string& key)
 {
 	std::string fullKey =  "tiles." + tile.name + "." + key;
-	if(!Json::findNode(path, fullKey))
+	if(!json->findNode(fullKey))
 		return;
 
-	if(Json::getLength(path, fullKey) >= 2)
+	if(json->getLength(fullKey) >= size)
 	{
 		
 	}
