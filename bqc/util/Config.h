@@ -18,7 +18,7 @@ public:
 };
 
 
-template <typename T> static T Config::get(std::string key)
+template <typename T> T Config::get(std::string key)
 {
 	int delimeterPos = key.find(".");
 	std::string file = key.substr(0, delimeterPos);
