@@ -26,7 +26,7 @@ private:
 	bool isArrayNodeValid(const std::string& key, int size);
 
 	template <typename T> void setTileProperty(const Tile& tile, T& tileProp, const std::string& key, const T& defaultValue);
-	template <typename T> void setTilePropertyArray(const Tile& tile, T* tileProp, int size, const std::string& key, const std::initializer_list<T>& defaultValue);
+	template <typename T> void setTilePropertyArray(const Tile& tile, T* tileProp, size_t size, const std::string& key, const std::initializer_list<T>& defaultValue);
 };
 
 template <typename T> void Tileset::setTileProperty(const Tile& tile, T& tileProp, const std::string& key, const T& defaultValue)
@@ -40,18 +40,18 @@ template <typename T> void Tileset::setTileProperty(const Tile& tile, T& tilePro
 
 }
 
-template <typename T> void Tileset::setTilePropertyArray(const Tile& tile, T* tileProp, int size, const std::string& key, const std::initializer_list<T>& defaultValue)
+template <typename T> void Tileset::setTilePropertyArray(const Tile& tile, T* tileProp, size_t size, const std::string& key, const std::initializer_list<T>& defaultValue)
 {
 	std::string fullKey =  "tiles." + tile.getName() + "." + key;
 
-	if (isArrayNodeValid(fullKey, size))
+	if (isArrayNodeValid(fullKey, (int)size))
 	{
-		if (defaultValue.size() < size) // default value too small, exit
+		if (defaultValue.size() != size)
 			return;
 
-		for (int i = 0; i < size; i++)
+		for (auto& value : defaultValue)
 		{
-			*tileProp = defaultValue[i];
+			*tileProp = value;
 			tileProp++;
 		}
 		return;
@@ -60,7 +60,7 @@ template <typename T> void Tileset::setTilePropertyArray(const Tile& tile, T* ti
 	for(int i = 0; i < size; i++)
 	{
 		*tileProp = json->getArrayItem<T>(fullKey, i);
-		tileProp++;
+		tileProp++;	
 	}
 }
 

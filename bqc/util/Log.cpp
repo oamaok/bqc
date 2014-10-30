@@ -4,6 +4,8 @@
 #include "util/Log.h"
 #include "util/Util.h"
 
+#define _CRT_SECURE_NO_WARNINGS
+
 // visual studio doesn't support snprintf, but has _snprintf instead, how convinient!
 #ifdef _MSC_VER
 	#define snprintf _snprintf

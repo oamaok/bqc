@@ -54,7 +54,7 @@ namespace util
 			exit(EXIT_FAILURE);
 		}
 		file.seekg(0, std::ios::end);
-		std::streamoff size = file.tellg();
+		unsigned int size = file.tellg();
 		std::string buffer(size, '\0');
 		file.seekg(0);
 		file.read(&buffer[0], size); 
