@@ -23,11 +23,12 @@ Tileset::Tileset(const std::string& name)
 
 		std::vector<std::string> childNames = json->getChildNames("tiles." + tileName);
 
+		// fetch properties for tiles or fill in the defaults if not set
 		setTileProperty<bool>(tile, tile.collides, "collides", false);
 		setTileProperty<bool>(tile, tile.movable, "movable", false);
 		setTileProperty<int>(tile, tile.limit, "limit", 0);
 		setTileProperty<int>(tile, tile.require, "require", 0);
-		setTilePropertyArray<int>(tile, tile.texture, 2, "texture");
+		setTilePropertyArray<int>(tile, tile.texture, 2, "texture", {0,0});
 
 		tiles.push_back(tile);
 	}
@@ -67,4 +68,12 @@ std::vector<std::string> Tileset::getTileNames()
 		names.push_back(tile.getName());
 	}
 	return names;
+}
+
+bool Tileset::isArrayNodeValid(const std::string& key, int size)
+{
+	return (!json->nodeExists(key) // check if the node exists to begin with
+		|| json->typeOf(key) != Json::JsonType::TYPE_ARRAY // check for right type
+		|| json->getLength(key) < size // check if the array is the right size or larger
+		);
 }
