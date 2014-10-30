@@ -23,15 +23,11 @@ Tileset::Tileset(const std::string& name)
 
 		std::vector<std::string> childNames = json->getChildNames("tiles." + tileName);
 
-		printf("%s:\n", tileName.c_str());
-
 		setTileProperty<bool>(tile, tile.collides, "collides", false);
 		setTileProperty<bool>(tile, tile.movable, "movable", false);
 		setTileProperty<int>(tile, tile.limit, "limit", 0);
 		setTileProperty<int>(tile, tile.require, "require", 0);
 		setTilePropertyArray<int>(tile, tile.texture, 2, "texture");
-
-		printf("\ttex: [%d,%d]\n", tile.texture[0], tile.texture[1]);
 
 		tiles.push_back(tile);
 	}
