@@ -24,20 +24,22 @@ public:
 		PARSE_ERROR,
 	};
 
-	JsonType typeOf(std::string key);
 	static std::shared_ptr<Json> loadJson(const std::string& path);
+	std::string getPath();
+
 	cJSON* findNode(std::string key);
+	JsonType typeOf(std::string key);
 	std::vector<std::string> getChildNames(std::string key);
 	std::vector<cJSON*> getChildren(std::string key);
 	int getLength(std::string key);
 	template <typename T> const T get(std::string key);
-	
-	std::string getPath();
+	template <typename T> const T getArrayItem(std::string key, int index);
+	bool nodeExists(std::string key);
 	JsonError getError() { return error; };
 	operator bool() const { return error == JsonError::NO_ERROR; };
 private:
-	void setError(JsonError err) { error = err; };
 	Json(const std::string& path);
+	void setError(JsonError err) { error = err; };
 	std::string path;
 	cJSON* rootNode;
 	static std::unordered_map<std::string, std::shared_ptr<Json>> jsonCache;
@@ -51,6 +53,14 @@ template <typename T> const T Json::get(std::string key)
 	if(node == nullptr)
 		return T();
 	return util::jsonCast<T>(node);
+}
+
+template <typename T> const T Json::getArrayItem(std::string key, int index)
+{
+	cJSON* node = findNode(key);
+	if(node == nullptr)
+		return T();
+	return util::jsonCast<T>(cJSON_GetArrayItem(node, index));
 }
 
 #endif

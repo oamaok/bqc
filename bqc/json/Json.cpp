@@ -108,8 +108,9 @@ cJSON* Json::findNode(std::string key)
 int Json::getLength(std::string key)
 {
 	cJSON* node = findNode(key);
-	if(node->type != cJSON_Array || node->type != cJSON_Object)
+	if(node->type != cJSON_Array && node->type != cJSON_Object)
 		return 0;
+
 	return cJSON_GetArraySize(node);
 }
 
@@ -144,4 +145,9 @@ std::vector<cJSON*> Json::getChildren(std::string key)
 	}
 
 	return ret;
+}
+
+bool Json::nodeExists(std::string key)
+{
+	return findNode(key) != nullptr;
 }

@@ -29,27 +29,33 @@ private:
 
 template <typename T> void Tileset::setTileProperty(const Tile& tile, T& tileProp, const std::string& key, const T& defaultValue)
 {
-	std::string fullKey = "tiles." + tile.name + "." + key;
-	if(json->findNode(fullKey))
-	{
+	std::string fullKey = "tiles." + tile.getName() + "." + key;
+
+	if(json->nodeExists(fullKey))
 		tileProp = json->get<T>(fullKey);
-	}
 	else
-	{
 		tileProp = defaultValue;
-	}
 
 }
 
 template <typename T> void Tileset::setTilePropertyArray(const Tile& tile, T* tileProp, int size, const std::string& key)
 {
-	std::string fullKey =  "tiles." + tile.name + "." + key;
-	if(!json->findNode(fullKey))
+	std::string fullKey =  "tiles." + tile.getName() + "." + key;
+
+	// check if the node exists to begin with
+	if(!json->nodeExists(fullKey))
 		return;
 
-	if(json->getLength(fullKey) >= size)
+	if(json->typeOf(fullKey) != Json::JsonType::TYPE_ARRAY)
+		return;
+
+	if(json->getLength(fullKey) < size)
+		return;
+
+	for(int i = 0; i < size; i++)
 	{
-		
+		*tileProp = json->getArrayItem<T>(fullKey, i);
+		tileProp++;
 	}
 }
 

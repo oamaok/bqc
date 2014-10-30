@@ -15,7 +15,6 @@ public:
 	void update();
 	void render();
 
-	std::string name;
 	bool collides;
 	bool movable;
 	int texture[2];
@@ -24,6 +23,7 @@ public:
 	const std::string getName() const;
 	
 private:
+	std::string name;
 };
 
 #endif

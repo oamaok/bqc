@@ -1,15 +1,10 @@
 #ifndef CONFIG_H_
 #define CONFIG_H_
 
-#include <memory>
 #include <string>
-#include <unordered_map>
-#include <vector>
-#include <iostream>
-#include <fstream>
 
 #include "json/Json.h"
-#include "util.h"
+#include "util/Util.h"
 
 class Config
 {
